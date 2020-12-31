@@ -17,9 +17,12 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-  res.send('test')
+  res.render('index')
 })
 
+app.post('/result', (req, res) => {
+  res.render('result')
+})
 app.listen(PORT, () => {
   console.log(`Express is listening on localhost:${PORT}at ${Date()}`)
 })
