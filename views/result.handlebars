@@ -1,13 +1,25 @@
 <div class="row mt-5">
   <div class="col-8" style="margin: 0 auto;">
-
-    <h1 style="text-align:center;">成功!</h1>
-    <h2 style="text-align:center;">請使用以下網址</h2>
+    {{#if shortenUrl}}
+    <h1 style="text-align:center;">Success!</h1>
+    <h2 style="text-align:center;">Please use following URL!</h2>
     <div style="text-align: center;">
       <a id="shortenUrl" href="{{shortenUrl}}"><span>{{shortenUrl}}</span></a>
     </div>
     <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary btn-lg mt-3" id="shortenUrl_copy">Copy</button>
+      <button type="button" class="btn btn-primary btn-lg mt-3" id="shortenUrl_copy">Copy</button>
     </div>
+    {{/if}}
+
+    {{#if errorMessage}}
+    <div>
+      <h1 style="text-align:center;">{{errorMessage}}</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a href="/">
+        <button type="button" class="btn btn-primary btn-lg mt-3">Back</button>
+      </a>
+    </div>
+    {{/if}}
   </div>
 </div>
