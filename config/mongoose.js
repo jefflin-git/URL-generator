@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 
 // 設定連線到 mongoDB
-mongoose.connect('mongodb://localhost/URL-generator', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/urlGenerator', { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
