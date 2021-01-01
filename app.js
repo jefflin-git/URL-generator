@@ -26,14 +26,30 @@ app.get('/', (req, res) => {
   }
 })
 
-app.post('/result', (req, res) => {
+app.post('/result', async (req, res) => {
   try {
     const originalUrl = req.body.originalUrl
-    const shortenUrl = getRandomUrl(5)
+    let shortenUrl = getRandomUrl(5)
+
+    // originalUrl  exists
+    const existsOriginalUrl = await Url.exists({ originalUrl })
+    if (existsOriginalUrl) {
+      res.render('result', { errorMessage: 'This url already has a short url,please back to previous page and try another url!' })
+      return
+    }
+
+    // shortenUrl  exists
+    let existsShortenUrl = await Url.exists({ shortenUrl })
+    while (existsShortenUrl) {
+      shortenUrl = getRandomUrl(5)
+      existsShortenUrl = await Url.exists({ shortenUrl })
+    }
+
     Url.create({ originalUrl, shortenUrl })
       .then(() => {
         res.render('result', { shortenUrl, originalUrl })
       })
+
   } catch (error) {
     console.error(error)
   }
