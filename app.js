@@ -29,7 +29,8 @@ app.get('/', (req, res) => {
 app.post('/result', async (req, res) => {
   try {
     const originalUrl = req.body.originalUrl
-    let shortenUrl = getRandomUrl(5)
+    const urlFront = `${(req.secure) ? 'https://' : 'http://'}` + `${req.headers.host}/`
+    let shortenUrl = urlFront + getRandomUrl(5)
 
     // originalUrl  exists
     const existsOriginalUrl = await Url.exists({ originalUrl })
@@ -41,10 +42,10 @@ app.post('/result', async (req, res) => {
     // shortenUrl  exists
     let existsShortenUrl = await Url.exists({ shortenUrl })
     while (existsShortenUrl) {
-      shortenUrl = getRandomUrl(5)
+      shortenUrl = urlFront + getRandomUrl(5)
       existsShortenUrl = await Url.exists({ shortenUrl })
     }
-
+    console.log(shortenUrl)
     Url.create({ originalUrl, shortenUrl })
       .then(() => {
         res.render('result', { shortenUrl, originalUrl })
@@ -55,7 +56,7 @@ app.post('/result', async (req, res) => {
   }
 })
 
-app.get('https://secure-caverns-88178.herokuapp.com/:shortenUrl', (req, res) => {
+app.get('/:shortenUrl', (req, res) => {
   try {
     Url.findOne({ shortenUrl: req.params.shortenUrl })
       .lean()

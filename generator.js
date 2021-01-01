@@ -6,7 +6,7 @@ function getRandomUrl(amount) {
     let randomIndex = Math.floor(Math.random() * (index + 1))
       ;[dataArray[index], dataArray[randomIndex]] = [dataArray[randomIndex], dataArray[index]]
   }
-  result = 'https://secure-caverns-88178.herokuapp.com/' + dataArray.slice(0, amount).join('')
+  result = dataArray.slice(0, amount).join('')
   return result
 }
 
