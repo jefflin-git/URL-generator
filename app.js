@@ -45,7 +45,6 @@ app.post('/result', async (req, res) => {
       shortenUrl = urlFront + getRandomUrl(5)
       existsShortenUrl = await Url.exists({ shortenUrl })
     }
-    console.log(shortenUrl)
     Url.create({ originalUrl, shortenUrl })
       .then(() => {
         res.render('result', { shortenUrl, originalUrl })
@@ -56,13 +55,13 @@ app.post('/result', async (req, res) => {
   }
 })
 
-app.get('/:shortenUrl', (req, res) => {
+app.get('/:shortUrl', async (req, res) => {
   try {
-    Url.findOne({ shortenUrl: req.params.shortenUrl })
-      .lean()
-      .then((url) => {
-        res.redirect(url.originalUrl)
-      })
+    const shortUrl = req.params.shortUrl
+    const allUrl = await Url.find().lean()
+    const findOriginalUrl = allUrl.find(url => url.shortenUrl.includes(shortUrl))
+    res.redirect(findOriginalUrl.originalUrl)
+
   } catch (error) {
     console.error(error)
   }
