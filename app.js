@@ -39,7 +39,7 @@ app.post('/result', (req, res) => {
   }
 })
 
-app.get('/:shortenUrl', (req, res) => {
+app.get('https://secure-caverns-88178.herokuapp.com/:shortenUrl', (req, res) => {
   try {
     Url.findOne({ shortenUrl: req.params.shortenUrl })
       .lean()
