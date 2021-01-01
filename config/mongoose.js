@@ -1,6 +1,6 @@
 // 載入 mongoose
 const mongoose = require('mongoose')
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/urlGenerator'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/url-data'
 // 設定連線到 mongoDB
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
