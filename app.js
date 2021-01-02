@@ -29,15 +29,18 @@ app.get('/', (req, res) => {
 app.post('/result', async (req, res) => {
   try {
     const originalUrl = req.body.originalUrl
-    const urlFront = `${(req.secure) ? 'https://' : 'http://'}` + `${req.headers.host}/`
-    let shortenUrl = urlFront + getRandomUrl(5)
 
     // originalUrl  exists
     const existsOriginalUrl = await Url.exists({ originalUrl })
     if (existsOriginalUrl) {
-      res.render('result', { errorMessage: 'This url already has a short url,please back to previous page and try another url!' })
+      const allUrl = await Url.find().lean()
+      const findShortenUrl = allUrl.find(url => url.originalUrl.includes(originalUrl))
+      res.render('result', { findShortenUrl: findShortenUrl.shortenUrl })
       return
     }
+
+    const urlFront = `${(req.secure) ? 'https://' : 'http://'}` + `${req.headers.host}/`
+    let shortenUrl = urlFront + getRandomUrl(5)
 
     // shortenUrl  exists
     let existsShortenUrl = await Url.exists({ shortenUrl })
@@ -45,6 +48,7 @@ app.post('/result', async (req, res) => {
       shortenUrl = urlFront + getRandomUrl(5)
       existsShortenUrl = await Url.exists({ shortenUrl })
     }
+
     Url.create({ originalUrl, shortenUrl })
       .then(() => {
         res.render('result', { shortenUrl, originalUrl })

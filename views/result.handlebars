@@ -2,24 +2,17 @@
   <div class="col-8" style="margin: 0 auto;">
     {{#if shortenUrl}}
     <h1 style="text-align:center;">Success!</h1>
-    <h2 style="text-align:center;">Please use following URL!</h2>
-    <div style="text-align: center;">
-      <a id="shortenUrl" href="{{shortenUrl}}"><span>{{shortenUrl}}</span></a>
-    </div>
-    <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-primary btn-lg mt-3" id="shortenUrl_copy">Copy</button>
-    </div>
+    <h2 style="text-align:center;">Please click following URL!</h2>
     {{/if}}
 
-    {{#if errorMessage}}
-    <div>
-      <h1 style="text-align:center;">{{errorMessage}}</h1>
-    </div>
-    <div class="d-flex justify-content-center">
-      <a href="/">
-        <button type="button" class="btn btn-primary btn-lg mt-3">Back</button>
-      </a>
-    </div>
+    {{#if findShortenUrl}}
+    <h1 style="text-align:center;">The url you input already has a short url!</h1>
+    <h2 style="text-align:center;">You can directly click this url!</h2>
     {{/if}}
+
+    <div style="text-align: center;">
+      <a id="shortenUrl" href="{{shortenUrl}}{{findShortenUrl}}"
+        target="_blank"><span>{{shortenUrl}}{{findShortenUrl}}</span></a>
+    </div>
   </div>
 </div>
