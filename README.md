@@ -2,11 +2,17 @@
 採用 Node.js 和 Express 打造的短網址產生器
 
 ## 專案畫面
-![短網址產生器](https://i.imgur.com/IGIcOeB.png)
+![短網址產生器首頁](https://i.imgur.com/nxXdQqm.png)
+
+![短網址產生器結果1](https://i.imgur.com/naZQb9v.png)
+
+![短網址產生器結果2](https://i.imgur.com/BC6arsy.png)
 
 ## 功能描述 (features)
 - 首頁畫面上有一個表單，使用者可以在表單輸入原始網址，送出表單之後，畫面會回傳格式化後的短網址
-- 在伺服器啟動期間，使用者可以在瀏覽器的網址列，輸入提供的短網址，瀏覽器就會導向原本的網站
+- 在伺服器啟動期間，使用者可以在瀏覽器的網址列，輸入提供的短網址，或是點擊連結，瀏覽器就會導向原本的網站
+- 當表單輸入原始網址已產生過短網址時，會顯示出原本的短網址
+- 按左上角的"URL Generator"可以回首頁
 
 ## 環境建置(prerequisites)
 - Node.js v10.15.0
